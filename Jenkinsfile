@@ -10,18 +10,29 @@ pipeline{
 
     stages{
         stage(CLEANWS){
-            cleanWs()
+            steps{
+                cleanWs()
+            }
+            
         }
         stage(GIT){
-            git branch: 'main', url: 'https://github.com/RukhsanaBegm/spring-petclinic'
+            steps{
+                git branch: 'main', url: 'https://github.com/RukhsanaBegm/spring-petclinic'
+            }
         }
 
         stage(build) {
-            sh(script: 'mvn package')
+            steps{
+                sh(script: 'mvn package')
+            }
+            
 
         }
         stage(archiveArtifacts) {
-            archiveArtifacts(artifacts: '**/*.jar')
+            steps{
+                archiveArtifacts(artifacts: '**/*.jar')
+            }
+            
         }
 
     }
